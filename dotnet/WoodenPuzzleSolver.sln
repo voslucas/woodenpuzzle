@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodenPuzzleSolver", "WoodenPuzzleSolver.csproj", "{5C24D181-82CB-4DE1-AF02-7CF06B7FA641}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C24D181-82CB-4DE1-AF02-7CF06B7FA641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C24D181-82CB-4DE1-AF02-7CF06B7FA641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C24D181-82CB-4DE1-AF02-7CF06B7FA641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C24D181-82CB-4DE1-AF02-7CF06B7FA641}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0FDAEB1F-BE01-422C-B068-CE9322F4B08C}
+	EndGlobalSection
+EndGlobal
