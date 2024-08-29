@@ -9,7 +9,7 @@ orientation(90).
 orientation(180).
 orientation(270).
 
-% Option to also define the mirrored orientations.
+% Option to also define the reflected orientations.
 orientation(m0).
 orientation(m90).
 orientation(m180).
@@ -25,9 +25,9 @@ colors(C) :- piece(_,_,_,C).
 available_orientation(P,0) :- pieces(P).
 
 % Choose between either depth based solutions (read the paper).
-available_orientation(PID,X) :- PID=1..depth, orientation(X).
+available_orientation(P,X) :- P=1..depth, orientation(X).
 % Or to load all logical orientations.
-% include "13p-definitions.lp".
+% #include "13p-orientations.lp".
 
 pos_color(X,Y, red) :- coord(X) , 
                        coord(Y) , 

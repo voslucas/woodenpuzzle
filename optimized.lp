@@ -25,7 +25,8 @@ colors(C) :- piece(_,_,_,C).
 available_orientation(P,0) :- pieces(P).
 
 % Choose between either depth based solutions (read the paper).
-available_orientation(PID,X) :- PID=1..depth, orientation(X).
+% For the depth based you should disable the mirrored orientations above! 
+available_orientation(P,X) :- P=1..depth, orientation(X).
 % Or to load all logical orientations.
 % include "13p-definitions.lp".
 

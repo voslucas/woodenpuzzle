@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -157,10 +158,79 @@ namespace WoodenPuzzleSolver
                     datastr += data[x, y] + ",";    
                 }
             }
-            return $"{size};{datastr}";
+            return $"{datastr}";
+        }
+
+        public static Board FromString(string boardAsString, int size) {
+            var data = new int[size, size];
+            var datastr = boardAsString.Split(',');
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    data[x, y] = int.Parse(datastr[y * size + x]);
+                }
+            }
+            return new Board(size, data);
+        }
+
+        public void Rotate90()
+        {
+            int[,] newData = new int[size, size];
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    newData[x, y] = data[size - y - 1, x];
+                }
+            }
+            data = newData;
+        }   
+
+        public Board Rotate90Clone()
+        {
+            var result = this.Clone();
+            result.Rotate90();
+            return result;
         }
 
 
+        public void Flip()
+        {
+            int[,] newData = new int[size, size];
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    newData[x, y] = data[size - x - 1, y];
+                }
+            }
+            data = newData;
+        }
+
+        public Board FlipClone()
+        {
+            var result = this.Clone();
+            result.Flip();
+            return result;
+        }
+
+        /// <summary>
+        /// Returns a numbering of the board that is used to compare boards in their different orientations
+        /// </summary>
+        /// <returns></returns>
+        public string AsCompareID()
+        {
+            var datastr = "";
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    datastr += Math.Abs(data[x, y]).ToString("00");
+                }
+            }
+            return datastr;
+        }
 
     }
 }

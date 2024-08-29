@@ -14,11 +14,11 @@ namespace WoodenPuzzleSolver
 
             //load the 13 pieces
             var pl = new PieceLoader();
-            var pieces = pl.LoadPieces("c://temp//asp//13p-definitions.lp");
+            var pieces = pl.LoadPieces("..//..//..//..//13p-definitions.lp");
 
 
             //get the max orientation depth from the first args parameter
-            int maxOrientationDepth = 12;
+            int maxOrientationDepth = 0;
             if (args.Length > 0)
             {
                 int.TryParse(args[0], out maxOrientationDepth);
@@ -29,8 +29,8 @@ namespace WoodenPuzzleSolver
             var opb = new OrientedPieceBuilder(pieces);
 
             
-            //var orientedPieces = opb.GetSmart(boardsize, allowMirroring: true);
-            var orientedPieces = opb.GetByDepth(maxOrientationDepth, allowMirroring: false);
+            var orientedPieces = opb.GetSmart(boardSize, allowMirroring: true);
+            //var orientedPieces = opb.GetByDepth(maxOrientationDepth, allowMirroring: false);
 
             //display the list of selected oriented pieces
             foreach (var op in orientedPieces)

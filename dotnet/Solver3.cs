@@ -20,10 +20,12 @@ namespace WoodenPuzzleSolver
         private int maxIndex;
         private bool outputEnabled = false;
         private int solutionCount = 0;
+        private int size = 0;
         private List<string> uniqueBoardString = new List<string>();
 
         public Solver3(Board b, bool outputEnabled = false)
         {
+            size = b.size;
             maxIndex = b.size * b.size;
             pieceListArr = new List<PosPiece>[maxIndex];
             this.outputEnabled = outputEnabled;
@@ -75,8 +77,11 @@ namespace WoodenPuzzleSolver
             uniqueBoardString.Clear();
             Step(0, b.Clone(), new int[] { } );
 
+            //determine the unique boards
+            int realUniqueBoardCount = GetSymmetricBoardCount();
 
-            Console.WriteLine($"Found {solutionCount} solutions on {uniqueBoardString.Count} unique boards");
+
+            Console.WriteLine($"Found {solutionCount} solutions on {uniqueBoardString.Count} unique boards and {realUniqueBoardCount} discounted for all orientations.");
           
         }
 
@@ -125,6 +130,46 @@ namespace WoodenPuzzleSolver
             }
 
             return true;
+        }
+
+
+        public int GetSymmetricBoardCount()
+        {
+
+            var realUniqueBoardString = new List<string>();
+
+            //for each unique board, we can generate 7 more by rotating and mirroring
+            foreach (var bstr in uniqueBoardString)
+            {
+                //recorver the board
+                var b = Board.FromString(bstr, size);
+                //generate 7 more boards
+                var b90 = b.Rotate90Clone();
+                var b180 = b90.Rotate90Clone();
+                var b270 = b180.Rotate90Clone();
+                //var mb = b.FlipClone();
+                //var mb90 = mb.Rotate90Clone();
+                //var mb180 = mb90.Rotate90Clone();
+                //var mb270 = mb180.Rotate90Clone();
+
+                //determine the root board by comparing each board.AsCompareID and take the lowest
+                var root = b;
+
+                if (String.Compare(b90.AsCompareID(), root.AsCompareID()) < 0)  { root = b90; };
+                if (String.Compare(b180.AsCompareID(), root.AsCompareID()) < 0) { root = b180; };
+                if (String.Compare(b270.AsCompareID(), root.AsCompareID()) < 0) { root = b270; };
+                //if (String.Compare(mb.AsCompareID(), root.AsCompareID()) < 0) { root = mb; };
+                //if (String.Compare(mb90.AsCompareID(), root.AsCompareID()) < 0) { root = mb90; };
+                //if (String.Compare(mb180.AsCompareID(), root.AsCompareID()) < 0) { root = mb180; };
+                //if (String.Compare(mb270.AsCompareID(), root.AsCompareID()) < 0) { root = mb270; };
+
+                if (!realUniqueBoardString.Contains(root.AsString()))
+                {
+                    realUniqueBoardString.Add(root.AsString());
+                }
+
+            }
+            return realUniqueBoardString.Count;
         }
 
     }
